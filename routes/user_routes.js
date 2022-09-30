@@ -1,8 +1,6 @@
 const router=require("express").Router();
 const bcryptjs=require("bcryptjs");
 const Usermodel=require("../models/user_model");
-const jwt=require("jsonwebtoken");
-const newjwt=require("../middleware/jwt");
 router.get("/welcome",async function(req,res){
     res.json({success:true,data:"welcomme"})
 
@@ -83,7 +81,7 @@ router.delete("/delete",async function(req,res){
 
 
 
-router.get("/users/:emailid",newjwt,async function(req,res){
+router.get("/users/:emailid",async function(req,res){
     userdata=req.params.emailid;
     const founduser=await Usermodel.findOne({email:userdata});
     if(!founduser){
